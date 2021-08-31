@@ -30,4 +30,8 @@ public class MemoryMemberRepository implements MemberRepository {
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }
+
+    public void clearStore(){
+        store.clear();//한 메소드 검사가 끝날때마다 메모리 초기화 반복
+    }
 }
