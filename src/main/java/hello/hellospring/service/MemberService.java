@@ -9,7 +9,12 @@ import java.util.Optional;
 
 public class MemberService { //비즈니스 메소드
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) { //외부에서 넣어준다 -> DI
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원 가입
@@ -24,9 +29,10 @@ public class MemberService { //비즈니스 메소드
     private void validateDuplicateMember(Member member) {
         //같은 이름이 있는 중복회원X
         //optional 안에 여러 메소드가 존재, 즉 Null일 가능성이 있으면 optional을 한번 감싼다.
-        memberRepository.findByName(member.getName()).ifPresent(m->{ //값이 있으면 멤버가 들어온다.
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        });
+        memberRepository.findByName(member.getName())
+                .ifPresent((Member m) -> { //이미 존재하는 회원이라면 예외가 발생
+                            throw new IllegalStateException("이미 존재하는 회원입니다.");
+                });
     }
 
     /**
@@ -37,7 +43,7 @@ public class MemberService { //비즈니스 메소드
         return memberRepository.findAll();
     }
 
-    public Optional<Member> findone(Long memberId){
+    public Optional<Member> findOne(Long memberId){
         return memberRepository.findById(memberId);
     }
 }
