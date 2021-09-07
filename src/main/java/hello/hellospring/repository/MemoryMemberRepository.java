@@ -1,16 +1,20 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+//컨트롤러, 서비스, 리포지토리 -> 되게 정용화된 패턴
+// 컨트롤러를 통해서 외부요청 받음, 서비스에서 비즈니스 로직 구현, 리포지토리에서 데이터를 저장
+@Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
 
     @Override
-    public Member save(Member member) {
+    public Member save(Member member) { //구현체
         member.setId(++sequence); //아이디 세팅
         store.put(member.getId(), member); //map에 아이디 저장
         return member;
