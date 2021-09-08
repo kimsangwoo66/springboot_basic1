@@ -7,7 +7,7 @@ import java.util.*;
 
 //컨트롤러, 서비스, 리포지토리 -> 되게 정용화된 패턴
 // 컨트롤러를 통해서 외부요청 받음, 서비스에서 비즈니스 로직 구현, 리포지토리에서 데이터를 저장
-@Repository
+
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();

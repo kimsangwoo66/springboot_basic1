@@ -8,7 +8,8 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MemberController {
 
-    private final MemberService memberService;
+    private  MemberService memberService;
+
 
     //스프링이 스프링 컨테이너에있는 멤버서비스를 가져다가 연결 시킴,autowired를 사용하면 컨트롤러랑 서비스랑 연결(의존관계 주입)
     @Autowired
