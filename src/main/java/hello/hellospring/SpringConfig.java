@@ -3,6 +3,7 @@ package hello.hellospring;
 import hello.hellospring.repository.JdbcMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import hello.hellospring.repository.jdbcTemplateMemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,10 +27,11 @@ public class SpringConfig {
     }
 
     @Bean //멤버리포지토리를 스프링빈에 등록한다.
-    public MemberRepository memberRepository() {
+    public MemberRepository memberRepository() { //이곳에서 조립한다.
 
         //return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+        //return new JdbcMemberRepository(dataSource);
+        return new jdbcTemplateMemberRepository(dataSource);
     }
 }
 
